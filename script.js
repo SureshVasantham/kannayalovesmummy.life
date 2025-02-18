@@ -2,6 +2,9 @@
 var audio = document.getElementById('audioPlayer');
 var playButton = document.getElementById('playButton');
 
+// Initially hide the play button
+playButton.style.display = 'none';
+
 // Function to handle play/pause toggle
 function toggleAudio() {
     if (audio.paused) {
@@ -42,7 +45,50 @@ function createHeart() {
 // Continuously create hearts every 300ms
 setInterval(createHeart, 300);
 
+// Typewriter Effect with backspace removal and delay
+function typeWriter(text, elementId, speed, callback) {
+    let i = 0;
+    const element = document.getElementById(elementId);
+    element.textContent = ""; // Clear any existing text
+    const interval = setInterval(() => {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(interval);
+            backspaceWriter(element, text, callback); // Call the backspace function after typing completes
+        }
+    }, 120); // Faster typing speed (previously 100ms)
+}
+
+// Backspace effect to remove the typed message
+function backspaceWriter(element, text, callback) {
+    let i = text.length;
+    const interval = setInterval(() => {
+        if (i > 0) {
+            element.textContent = element.textContent.slice(0, i - 1); // Remove last character
+            i--;
+        } else {
+            clearInterval(interval);
+            setTimeout(() => {
+                callback(); // After 1 second, show the surprise message and play button
+            }, 1000); // Wait for 1 second
+        }
+    }, 50); // Faster backspace speed (previously 100ms)
+}
+
+// Show the typing message first and then show the surprise message
 window.onload = () => {
-    const surpriseMessage = document.getElementById('surprise-message');
-    surpriseMessage.style.display = 'block'; // Display the surprise message after the page loads
+    const typingMessage = "Hi Mummy, it's a surprise from your Kannaya💖....";
+    typeWriter(typingMessage, "typing-message", 50, () => {
+        const typingMessageElement = document.getElementById('typing-message');
+        typingMessageElement.style.display = 'none'; // Hide the typing message after typing and backspace
+        const surpriseMessage = document.getElementById('surprise-message');
+        surpriseMessage.style.display = 'block'; // Show the surprise message
+        
+        // Wait for 3 seconds before showing the play button
+        setTimeout(() => {
+            playButton.style.display = 'block'; // Show the play button after 3 seconds
+        }, 3000); // 3000ms = 3 seconds
+    });
 };
