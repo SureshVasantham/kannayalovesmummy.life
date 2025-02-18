@@ -41,3 +41,8 @@ function createHeart() {
 
 // Continuously create hearts every 300ms
 setInterval(createHeart, 300);
+
+window.onload = () => {
+    const surpriseMessage = document.getElementById('surprise-message');
+    surpriseMessage.style.display = 'block'; // Display the surprise message after the page loads
+};
