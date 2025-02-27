@@ -1,34 +1,20 @@
-// Get elements
+// ✅ Elements
 var audio = document.getElementById('audioPlayer');
 var playButton = document.getElementById('playButton');
 var clickHereButton = document.getElementById('clickHereButton');
+var typingMessage = document.getElementById('typing-message');
+var surpriseMessage = document.getElementById('surprise-message');
+var finalMessage = document.getElementById('final-message'); 
+var secondClickHereButton = document.getElementById('secondClickHereButton'); // ✅ Replaced Back Button
 
-// Initially hide buttons
-playButton.style.opacity = '0';
-playButton.style.visibility = 'hidden';
-clickHereButton.style.opacity = '0';
-clickHereButton.style.visibility = 'hidden';
+// ✅ Fade-in Play Button on Load
+window.onload = () => {
+    setTimeout(() => {
+        playButton.style.opacity = '1';
+    }, 500);
+};
 
-// Function to play/pause audio
-function toggleAudio() {
-    if (audio.paused) {
-        audio.play();
-        playButton.textContent = 'Pause Music';
-    } else {
-        audio.pause();
-        playButton.textContent = 'Play Music';
-    }
-}
-
-// Event listener for Play Music button
-playButton.addEventListener('click', toggleAudio);
-
-// Event listener for Click Here button (redirects to another page)
-clickHereButton.addEventListener('click', function() {
-    window.location.href = 'newpage.html';
-});
-
-// Floating hearts animation
+// ✅ Floating Hearts Animation
 function createHeart() {
     const heart = document.createElement('span');
     heart.innerHTML = "❤️";
@@ -40,10 +26,7 @@ function createHeart() {
     setTimeout(() => heart.remove(), 6000);
 }
 
-// Continuously create hearts every 300ms
-setInterval(createHeart, 300);
-
-// Typing Effect with backspace
+// ✅ Typing & Backspace Animation
 function typeWriter(text, elementId, speed, callback) {
     let i = 0;
     const element = document.getElementById(elementId);
@@ -59,12 +42,12 @@ function typeWriter(text, elementId, speed, callback) {
     }, speed);
 }
 
-// Backspace Effect
+// ✅ Backspace Effect
 function backspaceWriter(element, text, callback) {
     let i = text.length;
     const interval = setInterval(() => {
         if (i > 0) {
-            element.textContent = element.textContent.slice(0, i - 1);
+            element.textContent = element.textContent.slice(0, -1);
             i--;
         } else {
             clearInterval(interval);
@@ -73,19 +56,73 @@ function backspaceWriter(element, text, callback) {
     }, 50);
 }
 
-// Show Typing Effect, then Show Buttons in Order
-window.onload = () => {
-    typeWriter("Hi Mummy, it's a surprise from your Kannaya💖....", "typing-message", 100, () => {
-        document.getElementById('typing-message').style.display = 'none';
-        document.getElementById('surprise-message').style.display = 'block';
+// ✅ Start Experience (Play Music, Hearts, Typing)
+playButton.addEventListener('click', () => {
+    audio.play();
+    setInterval(createHeart, 300);
+    
+    playButton.style.opacity = '0';
+    setTimeout(() => { 
+        playButton.style.display = 'none'; 
 
         setTimeout(() => {
-            playButton.style.visibility = 'visible';
-            playButton.style.opacity = '1';
-            setTimeout(() => {
-                clickHereButton.style.visibility = 'visible';
-                clickHereButton.style.opacity = '1';
-            }, 6000);
-        }, 3000);
+            typeWriter("Hi Mummy, it's a surprise from your Kannaya💖....", "typing-message", 100, () => {
+                typingMessage.style.display = 'none';
+                surpriseMessage.style.display = 'block';
+                setTimeout(() => { surpriseMessage.style.opacity = '1'; }, 100);
+                
+                setTimeout(() => {
+                    clickHereButton.style.visibility = 'visible';
+                    clickHereButton.style.opacity = '1';
+                }, 6000);
+            });
+        }, 2000);
+
+    }, 2000);
+});
+
+// ✅ First Click Here Button - Fade Out & Show Final Message
+clickHereButton.addEventListener('click', () => {
+    typingMessage.style.opacity = '0';
+    surpriseMessage.style.opacity = '0';
+    clickHereButton.style.opacity = '0';
+
+    setTimeout(() => {
+        finalMessage.style.display = 'block';
+        setTimeout(() => { 
+            finalMessage.style.opacity = '1'; 
+            finalMessage.classList.add('show-heading'); 
+        }, 100);
+
+        // ✅ Ensure the 2nd Click Here Button appears **6 SECONDS** after both sentences are displayed
+        setTimeout(() => {
+            secondClickHereButton.style.visibility = 'visible';
+            secondClickHereButton.style.opacity = '1';
+        }, 9000); // ⏳ 9 seconds total (3s sentence fade-in + 6s wait)
+    }, 2000);
+});
+
+
+
+
+// ✅ Second Click Here Button - Fade Out All Text (But Keep Hearts)
+secondClickHereButton.addEventListener('click', () => {
+    // Select all text elements (but NOT the floating hearts)
+    const allTextElements = document.querySelectorAll("#final-message, #typing-message, #surprise-message, #clickHereButton, #secondClickHereButton");
+
+    // Smoothly fade out all text
+    allTextElements.forEach(element => {
+        element.style.transition = "opacity 2s ease-out"; // Smooth fade-out
+        element.style.opacity = "0";
     });
-};
+
+    // Hide elements after fade-out
+    setTimeout(() => {
+        allTextElements.forEach(element => {
+            element.style.display = "none";
+        });
+    }, 2000); // Text disappears after 2 seconds
+});
+
+
+

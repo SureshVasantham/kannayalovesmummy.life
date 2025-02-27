@@ -1,4 +1,4 @@
-/* General styling */
+/* ✅ General Styling */
 body, html {
     height: 100%;
     margin: 0;
@@ -10,30 +10,30 @@ body, html {
     flex-direction: column;
 }
 
-/* Importing the Tangerine font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400&display=swap');
+/* ✅ Importing Elegant Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600&display=swap');
 
-/* Typing message styling */
+/* ✅ Typing Message */
 #typing-message {
     font-size: 50px;
     font-family: 'Tangerine', cursive;
-    font-weight: normal;
     color: #ff4d6d;
     text-align: center;
     margin-bottom: 20px;
-    display: block;
+    opacity: 1;
+    transition: opacity 2s ease-out;
 }
 
-/* Surprise message styling */
+/* ✅ Surprise Message */
 #surprise-message {
     text-align: center;
-    padding: 20px;
     font-size: 24px;
     font-weight: bold;
     color: #ff4d6d;
     margin-top: -300px;
     display: none;
-    animation: fadeIn 3s ease-out forwards;
+    opacity: 0;
+    transition: opacity 3s ease-out;
 }
 
 #surprise-message h1 {
@@ -41,17 +41,22 @@ body, html {
     color: #ff1e50;
 }
 
-/* Center the play button */
+/* ✅ Make Play Button Fade in Slower & Smoother */
+#playButton {
+    opacity: 0;
+    transition: opacity 4s ease-in-out; /* Slower (4s) and very smooth */
+}
+
+/* ✅ Centering Play Music Button */
 .container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10;
 }
 
-/* Style the Play Music & Click Here button */
-#playButton, #clickHereButton {
+/* ✅ Button Styling */
+#playButton, #clickHereButton, #backButton {
     padding: 20px 40px;
     font-size: 18px;
     background-color: #ff4d6d;
@@ -59,17 +64,19 @@ body, html {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, opacity 1s ease-in-out;
-    opacity: 0;  /* Initially hidden */
-    visibility: hidden;
+    transition: opacity 2s ease-out, background-color 0.3s ease;
 }
 
-/* Hover Effect */
-#playButton:hover, #clickHereButton:hover {
+/* ✅ Specific Button Properties */
+#playButton { opacity: 0; }
+#clickHereButton, #backButton { opacity: 0; visibility: hidden; }
+
+/* ✅ Button Hover Effect */
+#playButton:hover, #clickHereButton:hover, #backButton:hover {
     background-color: #ff1e50;
 }
 
-/* Bottom Button Positioning */
+/* ✅ Bottom Button Positioning */
 .bottom-container {
     position: absolute;
     bottom: 50px;
@@ -77,24 +84,90 @@ body, html {
     transform: translateX(-50%);
 }
 
-/* Floating hearts */
+/* ✅ Floating Hearts */
 .heart {
     position: fixed;
     bottom: -20px;
     color: red;
     font-size: 24px;
     animation: floatUp 5s linear forwards;
-    opacity: 1;
 }
 
-/* Keyframe animation for floating hearts */
+/* ✅ Floating Animation */
 @keyframes floatUp {
     0% { transform: translateY(0) scale(1); opacity: 1; }
     100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
 }
 
-/* Animation for fade-in effects */
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+/* ✅ Ensure Final Message is Hidden Initially */
+#final-message {
+    text-align: center;
+    color: white;
+    display: none; /* Hidden by default */
+    opacity: 0;
+}
+
+/* ✅ Updated Heading Animation - Runs Only When Visible */
+#final-message h1 {
+    font-size: 52px;
+    color: #ff1e50;
+    font-family: 'Playfair Display', serif;
+    text-shadow: 6px 6px 25px rgba(255, 0, 0, 0.8);
+    opacity: 0;
+    transform: translateY(-50px); /* Ensure it starts off-screen */
+}
+
+/* ✅ Slide-Down Animation (Applied AFTER Click) */
+.show-heading h1 {
+    animation: slideDown 1.8s ease-out forwards 1s;
+}
+
+@keyframes slideDown {
+    0% { transform: translateY(-50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ✅ Romantic Text Styling */
+.animated-text {
+    font-size: 36px;
+    font-family: 'Great Vibes', cursive;
+    text-align: center;
+    color: #ffdde1;
+    text-shadow: 2px 2px 15px rgba(255, 105, 180, 0.8);
+    opacity: 0;
+    animation: fadeInText 3s ease-in-out forwards;
+}
+
+/* ✅ Animation Delays */
+.line1 { animation-delay: 1.5s; }
+.line2 { animation-delay: 3s; margin-top: 15px; }
+
+/* ✅ Smooth Fade-in Effect */
+@keyframes fadeInText {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ✅ Styling for Both Click Here Buttons */
+#clickHereButton, #secondClickHereButton {
+    padding: 20px 40px;
+    font-size: 18px;
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 2s ease-out, background-color 0.3s ease;
+}
+
+/* ✅ Hide Second Click Here Button Initially */
+#secondClickHereButton {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* ✅ Button Hover Effect */
+#clickHereButton:hover, #secondClickHereButton:hover {
+    background-color: #ff1e50;
 }
