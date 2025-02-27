@@ -5,7 +5,7 @@ var clickHereButton = document.getElementById('clickHereButton');
 var typingMessage = document.getElementById('typing-message');
 var surpriseMessage = document.getElementById('surprise-message');
 var finalMessage = document.getElementById('final-message'); 
-var secondClickHereButton = document.getElementById('secondClickHereButton'); // ✅ Replaced Back Button
+var backButton = document.getElementById('backButton');
 
 // ✅ Fade-in Play Button on Load
 window.onload = () => {
@@ -60,7 +60,7 @@ function backspaceWriter(element, text, callback) {
 playButton.addEventListener('click', () => {
     audio.play();
     setInterval(createHeart, 300);
-    
+
     playButton.style.opacity = '0';
     setTimeout(() => { 
         playButton.style.display = 'none'; 
@@ -81,48 +81,32 @@ playButton.addEventListener('click', () => {
     }, 2000);
 });
 
-// ✅ First Click Here Button - Fade Out & Show Final Message
+// ✅ Click Here Button - Fade Out & Show Final Message
 clickHereButton.addEventListener('click', () => {
     typingMessage.style.opacity = '0';
     surpriseMessage.style.opacity = '0';
     clickHereButton.style.opacity = '0';
 
     setTimeout(() => {
-        finalMessage.style.display = 'block';
+        finalMessage.style.display = 'block'; 
         setTimeout(() => { 
             finalMessage.style.opacity = '1'; 
             finalMessage.classList.add('show-heading'); 
         }, 100);
-
-        // ✅ Ensure the 2nd Click Here Button appears **6 SECONDS** after both sentences are displayed
+        
         setTimeout(() => {
-            secondClickHereButton.style.visibility = 'visible';
-            secondClickHereButton.style.opacity = '1';
-        }, 9000); // ⏳ 9 seconds total (3s sentence fade-in + 6s wait)
+            backButton.style.visibility = 'visible';
+            backButton.style.opacity = '1';
+        }, 4000);
     }, 2000);
 });
 
+// ✅ Back to Home Button - Smooth Fade Out Before Reload
+backButton.addEventListener('click', () => {
+    document.body.style.transition = 'opacity 1.5s ease-out';
+    document.body.style.opacity = '0';
 
-
-
-// ✅ Second Click Here Button - Fade Out All Text (But Keep Hearts)
-secondClickHereButton.addEventListener('click', () => {
-    // Select all text elements (but NOT the floating hearts)
-    const allTextElements = document.querySelectorAll("#final-message, #typing-message, #surprise-message, #clickHereButton, #secondClickHereButton");
-
-    // Smoothly fade out all text
-    allTextElements.forEach(element => {
-        element.style.transition = "opacity 2s ease-out"; // Smooth fade-out
-        element.style.opacity = "0";
-    });
-
-    // Hide elements after fade-out
     setTimeout(() => {
-        allTextElements.forEach(element => {
-            element.style.display = "none";
-        });
-    }, 2000); // Text disappears after 2 seconds
+        location.reload();
+    }, 1500);
 });
-
-
-
