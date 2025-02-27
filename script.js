@@ -11,6 +11,7 @@ var backButton = document.getElementById('backButton');
 window.onload = () => {
     setTimeout(() => {
         playButton.style.opacity = '1';
+        playButton.style.visibility = 'visible';
     }, 500);
 };
 
@@ -81,7 +82,7 @@ playButton.addEventListener('click', () => {
     }, 2000);
 });
 
-// ✅ Click Here Button - Fade Out & Show Final Message
+// ✅ Click Here Button - Show Final Message & Delay 2nd Click Here Button
 clickHereButton.addEventListener('click', () => {
     typingMessage.style.opacity = '0';
     surpriseMessage.style.opacity = '0';
@@ -93,20 +94,25 @@ clickHereButton.addEventListener('click', () => {
             finalMessage.style.opacity = '1'; 
             finalMessage.classList.add('show-heading'); 
         }, 100);
-        
+
+        // ✅ Ensure 2nd Click Here button appears *exactly* after 6 seconds
         setTimeout(() => {
             backButton.style.visibility = 'visible';
             backButton.style.opacity = '1';
-        }, 4000);
+        }, 12000);
     }, 2000);
 });
 
-// ✅ Back to Home Button - Smooth Fade Out Before Reload
+// ✅ 2nd Click Here Button - Smooth Fade Out (Text Only)
 backButton.addEventListener('click', () => {
-    document.body.style.transition = 'opacity 1.5s ease-out';
-    document.body.style.opacity = '0';
+    const fadeOutElements = [typingMessage, surpriseMessage, finalMessage, playButton, clickHereButton, backButton];
+
+    fadeOutElements.forEach(element => {
+        element.style.transition = 'opacity 1.5s ease-out';
+        element.style.opacity = '0';
+    });
 
     setTimeout(() => {
-        location.reload();
+        fadeOutElements.forEach(element => element.style.display = 'none');
     }, 1500);
 });

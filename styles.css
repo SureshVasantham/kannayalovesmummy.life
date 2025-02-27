@@ -1,3 +1,4 @@
+/* ✅ General Styling */
 body, html {
     height: 100%;
     margin: 0;
@@ -11,6 +12,7 @@ body, html {
 
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600&display=swap');
 
+/* ✅ Typing Message */
 #typing-message {
     font-size: 50px;
     font-family: 'Tangerine', cursive;
@@ -20,6 +22,7 @@ body, html {
     transition: opacity 2s ease-out;
 }
 
+/* ✅ Surprise Message */
 #surprise-message {
     text-align: center;
     font-size: 24px;
@@ -36,11 +39,13 @@ body, html {
     color: #ff1e50;
 }
 
+/* ✅ Fade-in Play Button */
 #playButton {
     opacity: 0;
     transition: opacity 4s ease-in-out;
 }
 
+/* ✅ Centering Play Music Button */
 .container {
     position: absolute;
     top: 50%;
@@ -48,6 +53,7 @@ body, html {
     transform: translate(-50%, -50%);
 }
 
+/* ✅ Button Styling */
 #playButton, #clickHereButton, #backButton {
     padding: 20px 40px;
     font-size: 18px;
@@ -59,13 +65,16 @@ body, html {
     transition: opacity 2s ease-out, background-color 0.3s ease;
 }
 
+/* ✅ Specific Button Properties */
 #playButton { opacity: 0; }
 #clickHereButton, #backButton { opacity: 0; visibility: hidden; }
 
+/* ✅ Button Hover Effect */
 #playButton:hover, #clickHereButton:hover, #backButton:hover {
     background-color: #ff1e50;
 }
 
+/* ✅ Bottom Button Positioning */
 .bottom-container {
     position: absolute;
     bottom: 50px;
@@ -73,6 +82,7 @@ body, html {
     transform: translateX(-50%);
 }
 
+/* ✅ Floating Hearts */
 .heart {
     position: fixed;
     bottom: -20px;
@@ -81,11 +91,13 @@ body, html {
     animation: floatUp 5s linear forwards;
 }
 
+/* ✅ Floating Animation */
 @keyframes floatUp {
     0% { transform: translateY(0) scale(1); opacity: 1; }
     100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
 }
 
+/* ✅ Ensure Final Message is Hidden Initially */
 #final-message {
     text-align: center;
     color: white;
@@ -93,6 +105,7 @@ body, html {
     opacity: 0;
 }
 
+/* ✅ Updated Heading Animation */
 #final-message h1 {
     font-size: 52px;
     color: #ff1e50;
@@ -102,6 +115,7 @@ body, html {
     transform: translateY(-50px);
 }
 
+/* ✅ Slide-Down Animation */
 .show-heading h1 {
     animation: slideDown 1.8s ease-out forwards 1s;
 }
@@ -111,6 +125,7 @@ body, html {
     100% { transform: translateY(0); opacity: 1; }
 }
 
+/* ✅ Romantic Text Styling */
 .animated-text {
     font-size: 36px;
     font-family: 'Great Vibes', cursive;
@@ -121,10 +136,19 @@ body, html {
     animation: fadeInText 3s ease-in-out forwards;
 }
 
+/* ✅ Animation Delays */
 .line1 { animation-delay: 1.5s; }
 .line2 { animation-delay: 3s; margin-top: 15px; }
 
+/* ✅ Smooth Fade-in Effect */
 @keyframes fadeInText {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ✅ Back Button Fade-in Delay */
+#backButton {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 2s ease-in-out;
 }
