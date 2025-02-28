@@ -54,7 +54,7 @@ body, html {
 }
 
 /* ✅ Button Styling */
-#playButton, #clickHereButton, #backButton {
+#playButton, #clickHereButton, #backButton, #clickHereButton3 {
     padding: 20px 40px;
     font-size: 18px;
     background-color: #ff4d6d;
@@ -65,12 +65,8 @@ body, html {
     transition: opacity 2s ease-out, background-color 0.3s ease;
 }
 
-/* ✅ Specific Button Properties */
-#playButton { opacity: 0; }
-#clickHereButton, #backButton { opacity: 0; visibility: hidden; }
-
 /* ✅ Button Hover Effect */
-#playButton:hover, #clickHereButton:hover, #backButton:hover {
+#playButton:hover, #clickHereButton:hover, #backButton:hover, #clickHereButton3:hover {
     background-color: #ff1e50;
 }
 
@@ -153,7 +149,7 @@ body, html {
     transition: opacity 2s ease-in-out;
 }
 
-/* ✅ New Animated Message/Poem (Moved to the Top) */
+/* ✅ Poem Section */
 #poem-container {
     display: none;
     text-align: center;
@@ -161,40 +157,86 @@ body, html {
     font-family: 'Great Vibes', cursive;
     font-size: 32px;
     position: fixed;
-    top: 10%; /* 📌 Moved to the top */
-    left: 25%;
+    top: 10%;
+    left: 50%;
     transform: translate(-50%, 0);
     width: 80%;
     max-width: 800px;
     line-height: 1.5;
     opacity: 0;
-    animation: fadeInPoem 3s ease-in forwards;
 }
 
-/* ✅ Centered Heading */
-#poem-container h1 {
-    font-size: 48px;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 4px 4px 10px rgba(255, 20, 147, 0.8);
-    margin-bottom: 15px;
-}
-
-/* ✅ Poem Text */
-.poem-line {
-    font-size: 30px;
-    opacity: 0;
-    animation: fadeInPoem 3s ease-in forwards;
-}
-
-/* ✅ Fade-in Animation for Each Line */
-@keyframes fadeInPoem {
+/* ✅ Poem Heading - Slide Up + Fade In */
+@keyframes slideUpFadeIn {
     0% { opacity: 0; transform: translateY(30px); }
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* ✅ Line-by-Line Animation Delays */
-.delay1 { animation-delay: 1s; }
-.delay2 { animation-delay: 2.5s; }
-.delay3 { animation-delay: 4s; }
-.delay4 { animation-delay: 5.5s; }
+.poem-heading {
+    font-size: 48px;
+    opacity: 0;
+    animation: slideUpFadeIn 1.5s ease-in forwards;
+}
+
+/* ✅ Poem Lines - Appear One by One */
+.poem-line {
+    font-size: 30px;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* ✅ Fade-Out Animation */
+@keyframes fadeOutPoem {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.fade-out-poem {
+    animation: fadeOutPoem 1.5s ease-out forwards;
+}
+
+/* ✅ Closing Message */
+#closing-message {
+    text-align: center;
+    color: white;
+    font-size: 32px;
+    font-family: 'Great Vibes', cursive;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+/* ✅ Closing Text Animation */
+#thankYouText, #finalWishText {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+}
+
+.hidden {
+    display: none;
+}
+
+#replayButton {
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 2s ease-in-out, background-color 0.3s ease;
+    position: relative;
+    z-index: 10;
+    margin-top: 20px; /* Adds spacing from the text */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ✅ Hover effect for better UI */
+#replayButton:hover {
+    background-color: #ff1e50;
+}
+
