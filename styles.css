@@ -152,3 +152,49 @@ body, html {
     visibility: hidden;
     transition: opacity 2s ease-in-out;
 }
+
+/* ✅ New Animated Message/Poem (Moved to the Top) */
+#poem-container {
+    display: none;
+    text-align: center;
+    color: white;
+    font-family: 'Great Vibes', cursive;
+    font-size: 32px;
+    position: fixed;
+    top: 10%; /* 📌 Moved to the top */
+    left: 25%;
+    transform: translate(-50%, 0);
+    width: 80%;
+    max-width: 800px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeInPoem 3s ease-in forwards;
+}
+
+/* ✅ Centered Heading */
+#poem-container h1 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 4px 4px 10px rgba(255, 20, 147, 0.8);
+    margin-bottom: 15px;
+}
+
+/* ✅ Poem Text */
+.poem-line {
+    font-size: 30px;
+    opacity: 0;
+    animation: fadeInPoem 3s ease-in forwards;
+}
+
+/* ✅ Fade-in Animation for Each Line */
+@keyframes fadeInPoem {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ✅ Line-by-Line Animation Delays */
+.delay1 { animation-delay: 1s; }
+.delay2 { animation-delay: 2.5s; }
+.delay3 { animation-delay: 4s; }
+.delay4 { animation-delay: 5.5s; }

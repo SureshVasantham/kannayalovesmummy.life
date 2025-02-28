@@ -6,6 +6,7 @@ var typingMessage = document.getElementById('typing-message');
 var surpriseMessage = document.getElementById('surprise-message');
 var finalMessage = document.getElementById('final-message'); 
 var backButton = document.getElementById('backButton');
+var poemContainer = document.getElementById('poem-container');
 
 // ✅ Fade-in Play Button on Load
 window.onload = () => {
@@ -103,7 +104,7 @@ clickHereButton.addEventListener('click', () => {
     }, 2000);
 });
 
-// ✅ 2nd Click Here Button - Smooth Fade Out (Text Only)
+// ✅ 2nd Click Here Button - Smooth Fade Out + Show Poem
 backButton.addEventListener('click', () => {
     const fadeOutElements = [typingMessage, surpriseMessage, finalMessage, playButton, clickHereButton, backButton];
 
@@ -114,5 +115,11 @@ backButton.addEventListener('click', () => {
 
     setTimeout(() => {
         fadeOutElements.forEach(element => element.style.display = 'none');
+
+        // ✅ Show the Poem After Fade-out
+        poemContainer.style.display = "block";
+        setTimeout(() => {
+            poemContainer.style.opacity = "1";
+        }, 100);
     }, 1500);
 });
